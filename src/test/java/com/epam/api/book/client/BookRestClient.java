@@ -1,18 +1,20 @@
 package com.epam.api.book.client;
 
 import com.epam.api.book.data.Book;
-import com.epam.utils.JsonUtils;
+import com.epam.api.book.data.BookList;
 import com.epam.api.data.HttpRequest;
 import com.epam.api.rest.HttpRequestExecutor;
 import com.epam.api.rest.HttpRequestValidator;
+import com.epam.utils.JsonUtils;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
+@Slf4j
 public class BookRestClient implements BookClient {
 
     private static final String GET_BOOK_PATH = "/v1/Books";
@@ -41,7 +43,7 @@ public class BookRestClient implements BookClient {
                 .build();
         var response = httpRequestExecutor.get(httpRequest);
         httpRequestValidator.validate(response, HTTP_OK);
-        return Arrays.asList(response.getBody().as(Book[].class));
+        return response.getBody().as(BookList.class).getBooks();
     }
 
     @Override
