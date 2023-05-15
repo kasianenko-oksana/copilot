@@ -2,9 +2,12 @@ package com.epam.api.rest;
 
 import com.epam.api.data.HttpRequest;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+
+import java.io.PrintStream;
 
 public class HttpRequestExecutor {
 
@@ -38,7 +41,9 @@ public class HttpRequestExecutor {
 
     private RequestSpecification configRestRequest(HttpRequest request) {
         return RestAssured
-                .given().relaxedHTTPSValidation()
+                .given()
+                .log().all()
+                .relaxedHTTPSValidation()
                 .contentType(ContentType.JSON).accept(ContentType.JSON)
                 .baseUri(request.getUrl());
     }

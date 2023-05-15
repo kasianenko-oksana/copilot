@@ -5,6 +5,7 @@ import com.epam.api.rest.HttpRequestExecutor;
 import com.epam.api.rest.HttpRequestValidator;
 import com.epam.utils.JsonUtils;
 import com.epam.utils.PropertiesUtils;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.var;
 import org.testng.Assert;
